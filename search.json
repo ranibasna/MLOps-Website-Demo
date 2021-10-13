@@ -1,0 +1,26 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "description": "Some additional details about the website",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-10-13T08:23:41+00:00"
+    },
+    {
+      "path": "index.html",
+      "title": "MLOps Course",
+      "description": "This is a demo page for the course MLOps.\n",
+      "author": [
+        {
+          "name": "Rani Basna",
+          "url": {}
+        }
+      ],
+      "contents": "\n\nContents\nWelcome\nA preliminary course topics\nTensorFlow extensions\nMachine learning pipeline\nSlack channel\nProjects and assignments\nReference\n\n\n\n\n\nWelcome\nThis is a demo course the cover the topics of machine learning operations architecture. Currently the course has one presentation that can be find in the slide section.\nA preliminary course topics\nIntroduction to Git and GitHub.\nproject organization and environment package manager Conda.\nIntroduction to container Technology, Docker.\nContinuous integration and Unit testing with Pytest and GitHub actions.\nOverview of machine learning models (data exploration, data analysis, data transformation, model training and validation, and model analysis).\nData versioning with DVC.\nMachine learning model pipelines with DVC pipeline.\nMachine learning model experiment tracking with MlFlow. _ Machine learning model deployment.\nEnd to end MLOps with DVC, MlFlow, Airflow.\nEnd to end MLOps with TesnorFlow extended and KubeFlow using Google cloud platform.\nTensorFlow extensions\nAlso, there are one article that explain the uses of TensorFlow extensions TFX. The main goal of the TensorFlow article is to show case of how one cau utilize TensorFlow as an one solution to tackle the challnges of machine learning operations.\nMachine learning pipeline\nAnother planned article iis to cover the use of IML, DVC, MlFlow, and GitHub actions as a good way to construct a machine learning pipeline.\nSlack channel\nThere will be a slack channel. The main usage is for asking questions and exchange idea and discussing between students.\nProjects and assignments\nHere you will find a list of the requested assignments as well as information about the final project.\nReference\nPaleyes, A., Urma, R.-G., & Lawrence, N. D. (2020). Challenges in deploying machine learning: A survey of case studies.\nSculley, D., Holt, G., Golovin, D., Davydov, E., & Phillips, T. (n.d.). Hidden technical debt in machine learning systems. Retrieved April 28, 2021, from Nips.c https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf\nEric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang, Martin Zinkevich, data validation for machine learning (2019), SysML Conference https://systemsandml.org\n\n\n\n",
+      "last_modified": "2021-10-13T08:23:42+00:00"
+    }
+  ],
+  "collections": []
+}
