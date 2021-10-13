@@ -1,0 +1,36 @@
+name: "mlops"
+title: "MLOps Course"
+description: |
+  MLOps Course
+output_dir: "_site"
+navbar:
+  right:
+    - text: "Home"
+      href: index.html
+    - text: "About"
+      href: about.html
+    - text: "Slides"
+      menu:
+        - text: "Lecture"
+          href: "slides/MLOpsLecture.html"
+    - text: "Workflows"
+      menu:
+        - text: "TensorFlow extenstion"
+          href: "NoteBooks/TFX.html"
+        - text: "Data versioning with DVC"
+          href: "NoteBooks/DVC.html"
+        - text: "Data Pipeline with DVC"
+          href: "NoteBooks/DVC_pipeline.html"
+        - text: "Continuous machine learning"
+          href: "NoteBooks/CML_GitHubActions.html"
+    - icon: fab fa-github
+      href: https://github.com/ranibasna/MLOps
+repository_url: https://github.com/ranibasna/MLOps
+output:
+  distill::distill_article:
+    toc: true
+    toc_float: true
+
+
+
+

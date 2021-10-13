@@ -1,0 +1,49 @@
+---
+title: "Continuous Machine Learning"
+description: |
+  A continuous Machine Learning approach to machine learning CI/CD.
+author:
+  - name: Rani Basna
+    affiliation: KRC
+date: "`r Sys.Date()`"
+output: distill::distill_article
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+# Intorduction
+
+CML, which stands by Continuous Machine Learning, it's an open-source library centered on delivering CI/CD for machine learning projects. As the name may suggest we are now focusing on automatizing actual machine learning processes (compared to automatizing unit testing). CML sources include GitFlow: Using Git workflow for managing experiments alongside DVC versioning data and models. Automatics reports for machine learning runs and experiments: CML can produce reports in pull requests with metrics and plots helping the team to make informed and data-driven decisions. In essence,  CML helps data scientists to easily get a report about how a specific run performed. Technology Agnostics: Build pipelines with Github or Gitlab and run experiments with any cloud service and works for any programing language such as python and R. Since we are using Github as our Git repository, Github Actions will be used to set up CML. Github Actions is managed by Github.
+
+
+
+# Exercise 
+
+Let us use the same train.py file that was used in the previous lesson. The idea here is to simulate a scenario that one of the data scientists in the company has added some feature to the already existing model. Usually, this has to be done in a new experiment branch. Then it is. very good. idea if the same person can share his results with the rest of the team. The ideal case is that the data scientist want to test the whole process. So he goes in wriitting unit test (for example usiing the usual GitHub actions workflow). In addition, and since this is a machine elaerning project, she/he wants to run the project and get some report that shows the progress of the new feature that he is deveeloping.
+
+1. Use the same project that was used for the data pipeline lesson.
+2. implement some unit test using the pytest library in python (if you are using R this can be done by using testhat).
+3. Creat a new branch and checkout.
+4. Try to improve the model by for example tune the parameters, or usng different model.
+5. Add the cml functionality by using the below code (adjust your sel accordingly)
+
+![](CML_GitHubActions.png)
+
+6.In GitHub, open up a Pull Request to compare the experiment branch to master.
+
+7. Did you get the gree sign?
+
+Shortly, you should see a comment from github-actions appear in the Pull Request with your CML report. This is a result of the cml send-comment command in your workflow.
+
+
+
+
+
+
+
+
+
+
+

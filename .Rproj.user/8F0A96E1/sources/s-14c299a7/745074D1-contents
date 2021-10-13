@@ -1,0 +1,64 @@
+---
+title: "MLOps Course"
+description: |
+  This is a demo page for the course MLOps.
+author:
+  - name: Rani Basna
+    affiliation: KRC  
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+```
+
+
+```{r cover-image, echo=FALSE, fig.align="center", fig.cap=NULL}
+knitr::include_graphics("mlops-loop-en.jpeg")
+```
+
+
+# Welcome
+
+This is a demo course the cover the topics of machine learning operations architecture. Currently the course has one presentation that can be find in the slide section. 
+
+## A preliminary course topics
+
+- Introduction to Git and GitHub.
+- project organization and environment package manager Conda.
+- Introduction to container Technology, Docker.
+- Continuous integration and Unit testing with Pytest and GitHub actions.
+- Overview of machine learning models (data exploration, data analysis, data transformation, model training and validation, and model analysis).
+- Data versioning with DVC.
+- Machine learning model pipelines with DVC pipeline.
+- Machine learning model experiment tracking with MlFlow.
+_ Machine learning model deployment. 
+- End to end MLOps with DVC, MlFlow, Airflow.
+- End to end MLOps with TesnorFlow extended and KubeFlow using Google cloud platform.
+
+## TensorFlow extensions
+
+Also, there are one article that explain the uses of TensorFlow extensions TFX. The main goal of the TensorFlow article is to show case of how one cau utilize TensorFlow as an one solution to tackle the challnges of machine learning operations.
+
+## Machine learning pipeline 
+
+Another planned article iis to cover the use of IML, DVC, MlFlow, and GitHub actions as a good way to construct a machine learning pipeline. 
+
+## Slack channel
+
+There will be a slack channel. The main usage is for asking questions and exchange idea and discussing between students.
+
+
+## Projects and assignments 
+
+Here you will find a list of the requested assignments as well as information about the final project.
+
+## Reference 
+
+1. Paleyes, A., Urma, R.-G., & Lawrence, N. D. (2020). Challenges in deploying machine learning: A survey of case studies. 
+2. Sculley, D., Holt, G., Golovin, D., Davydov, E., & Phillips, T. (n.d.). Hidden technical debt in machine learning systems. Retrieved April 28, 2021, from Nips.c https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf
+3. Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang, Martin Zinkevich, data validation for machine learning (2019), SysML Conference https://systemsandml.org

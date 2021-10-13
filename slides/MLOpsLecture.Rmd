@@ -1,0 +1,800 @@
+---
+title: "Trail lecture"
+subtitle: "MLOps: Architecting  production ML Systems"
+author: "Rani Basna"
+institute: "KRC, university of Gothenburg"
+date: "2021-10-18"
+output:
+  xaringan::moon_reader:
+    seal: false
+    anchor_sections: FALSE
+    css: xaringan-themer.css
+    # css: ["default", "css/theme.css", "css/fonts.css"]
+    lib_dir: libs
+    nature:
+      slideNumberFormat: |
+        <div class="progress-bar-container">
+          <div class="progress-bar" style="width: calc(%current% / %total% * 100%);">
+          </div>
+        </div>
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+      ratio: "16:9"
+    includes:
+     in_header: header.html
+---
+
+class: title-slide, right, middle 
+background-image: url(https://source.unsplash.com/NQ5NBa7i660)
+background-position: right
+background-size: cover
+
+.pull-right[
+
+# `r rmarkdown::metadata$title`
+## `r rmarkdown::metadata$subtitle`
+
+### `r rmarkdown::metadata$author`
+
+### `r rmarkdown::metadata$date`
+]
+
+
+```{r, eval=FALSE, include=FALSE}
+install.packages("xaringan")
+install.packages("devtools")
+devtools::install_github("gadenbuie/xaringanExtra")
+install.packages("xaringanthemer")
+install.packages("showtext")
+install.packages("remotes")
+remotes::install_github("mitchelloharawild/icons")
+devtools::install_github('emitanaka/anicon')
+# install.packages("bookdown")
+
+
+```
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.path="figures/", echo=FALSE, warning=FALSE, message=FALSE, fig.retina=3, fig.asp=.5, out.width='100%', fig.showtext = TRUE, comment = NULL)
+
+# for fonts
+library(showtext)
+library(xaringanExtra)
+library(anicon)
+library(countdown)
+xaringanExtra::use_panelset()
+```
+
+```{r xaringan-extra-styles, include=FALSE}
+xaringanExtra::use_extra_styles(
+  hover_code_line = TRUE,         #<<
+  mute_unhighlighted_code = TRUE  #<<
+)
+```
+
+```{r xaringan-tachyons, echo=FALSE}
+xaringanExtra::use_tachyons()
+```
+
+
+```{r xaringanExtra, echo = FALSE}
+xaringanExtra::use_progress_bar(color = "#0051BA", location = "top")
+```
+
+```{r xaringan-scribble, echo=FALSE}
+xaringanExtra::use_scribble()
+```
+
+```{r tileView, echo=FALSE}
+xaringanExtra::use_tile_view()
+```
+
+
+```{css echo=FALSE}
+.highlight-last-item > ul > li, 
+.highlight-last-item > ol > li {
+  opacity: 0.5;
+}
+.highlight-last-item > ul > li:last-of-type,
+.highlight-last-item > ol > li:last-of-type {
+  opacity: 1;
+}
+```
+
+```{css echo=FALSE}
+.bold-last-item > ul > li:last-of-type,
+.bold-last-item > ol > li:last-of-type {
+  font-weight: bold;
+}
+```
+
+<!-- #1c5253 -->
+
+
+```{r xaringan-themer, include=FALSE, warning=FALSE}
+library(xaringanthemer)
+# style_mono_accent(
+#   base_color = "#21130d",
+#   header_font_google = google_font("Josefin Sans"),
+#   text_font_google   = google_font("Montserrat", "300", "300i"),
+#   code_font_google   = google_font("Fira Mono")
+# )
+style_duo(primary_color = "#1F4257", secondary_color = "#F97B64", code_inline_color = "#B56B6F", title_slide_text_color = "#FFFFFF",
+  code_highlight_color = "transparent", 
+  extra_css = list(
+  ".remark-slide-content h3" = list(
+    "margin-bottom" = 0, 
+    "margin-top" = 0
+  ),
+  ".smallish, .smallish .remark-code-line" = list(`font-size` = "0.9em")
+))
+```
+
+<style>
+.larger {
+font-size: 1.2em
+}
+</style>
+
+<style>
+.largest {
+font-size: 1.5em
+}
+</style>
+
+
+---
+layout: false
+.left-column[
+  ## What is it?
+]
+.right-column[
+  - A simple, in-browser, Markdown-driven slideshow tool targeted at people who know their way around HTML and CSS, featuring:
+
+- Markdown formatting, with smart extensions
+
+]
+
+---
+.left-column[
+  ## What is it?
+  ## Why use it?
+]
+.right-column[
+- A simple, in-browser, Markdown-driven slideshow tool targeted at people who know their way around HTML and CSS, featuring:
+  
+- Markdown formatting, with smart extensions
+  
+- If your ideal slideshow creation workflow contains any of the following steps:
+
+- Just write what's on your mind
+
+....
+]
+
+---
+.left-column[
+  ## What is it?
+  ## Why use it?
+]
+.right-column[
+As the slideshow is expressed using Markdown, you may:
+
+- Focus on the content, expressing yourself in next to plain text not worrying what flashy graphics and disturbing effects to put where
+
+....
+]
+
+---
+.left-column[
+  ## Left column title
+]
+.right-column[
+ A whole sentence
+
++ one `Markdown` bullet point
+{{content}}
+
+]
+
+--
+
++ a second bullet point
+{{content}}
+
+--
+
++ a third bullet point
+{{content}}
+
+--
+
+    + a sub level
+
+---
+.right-column[
+## Left column title
+
+![](figures/mlops-loop-en.jpeg)
+
+]
+.left-column[
+
++ .larger[It is a family of methods and perspectives. ] 
+{{content}}
+
+]
+
+--
+
++ It aims to make the life cycle of machine learning (ML) models ready for production.
+{{content}}
+
+--
+
++ This includes making the ML model life cycle reproducible,  testable, trackable, and, dynamic.
+{{content}}
+
+--
+
+    + a sub level
+
+
+---
+class: middle
+
+.f3[
+## What is MLOps
+***
+]
+
+--
+
+.f3[
+## Motivation and Introduction
+]
+
+---
+name: MLOpsMotivation
+class: top , left
+background-image: url("https://ml-ops.org/img/mlops-loop-en.jpg")
+background-position: 100% 50%
+background-size: 50% 70%
+
+---
+name: MLOpsMotivation_1
+template: MLOpsMotivation
+class: middle
+.pull-left[
+
+- .larger[It is a family of methods and perspectives. ] 
+
+- .larger[It aims to make the life cycle of machine learning (ML) models ready for production. ]
+
+- .larger[This includes making the ML model life cycle reproducible,  testable, trackable, and, dynamic.]
+]
+
+---
+name: MLOpsMotivation_2
+template: MLOpsMotivation
+class: middle
+
+.pull-left[
+- .larger[Machine learning life cycle is constantly evolving.]
+
+- .larger[Few years back the graphics illustrating this cycle, emphasis on the usual aspects (data prep and cleaning, EDA, modeling etc…). ]
+
+- .larger[Less attention on the elusive and less tangible final state, termed deployment]
+]
+
+---
+class: middle 
+
+.left-column[
+> .largest[What does that mean?]
+]
+
+--
+
+.left-column[
+> .largest[Why is this important?]
+]
+
+--
+
+.left-column[
+> .largest[What are the challenges?]
+]
+
+
+
+
+
+---
+background-image: url("https://1fykyq3mdn5r21tpna3wkdyi-wpengine.netdna-ssl.com/wp-content/uploads/2018/11/image6.png")
+background-size: cover
+background-color: white
+
+---
+class: top, center, inverse
+background-image: url("figures/UsualMlLifeCyckl.png")
+background-size: 100%
+background-position: middle 
+background-color: white
+
+## The popular manual approach
+
+
+.footnote[[source: Maggie Mhanna toward data science](https://towardsdatascience.com/mlops-practices-for-data-scientists-dbb01be45dd8)]
+
+---
+class: section, middle, center
+
+.f3[
+## Challenges with the manual approach
+***
+]
+
+--
+
+## Data dependency challenge (data and concept drift)
+
+
+---
+## Discussion `r anicon::faa("comment-dots", animate="burst")`
+
+<!-- comment-dots -->
+
+### What type of challnges with regards to the data could cause potential problems for a data scientist
+
+```{r echo = FALSE}
+countdown(minutes = 2)
+```
+---
+class: middle
+name: datadrift
+background-image: url("https://i.redd.it/50yslv18hse71.jpg")
+background-size: contain
+background-position: left
+
+---
+name: datadrift1
+template: datadrift
+class: middle
+
+
+.pull-right[
++ .larger[ **Data** **drift** is the changes in the input data distribution.]  
+]
+
+--
+
+.pull-right[
++ .larger[What if your data changes after your system has been deployed? This will cause a drop in the prediction  **quality**!! ]
+]
+
+--
+
+.pull-right[
++ .larger[**Concept** **drift** means that the mapping from input data x to y has changed.]
+]
+
+--
+
+.pull-right[
++ .larger[For example, if you are trying to estimate the housing price and an increase in the price occur because of inflation. The features of the house (the distribution of the data x) has not changed, but the price y did.]
+]
+
+
+???
+
+Both drifts can be fast changes or gradual changes
+
+---
+name: datadriftExample_2
+background-image: url(figures/ClinicalDataDrift.png)
+background-size: 50%
+background-position: right
+class: middle
+
+.pull-left[
+
+## Data drift example
+
+- The difference in distributions for each feature is measured and evaluated as statistically significant.
+
+- One can use for example, Kolmogorov-Smirnov tests for numerical features and Chi-Squared test for categorical features, each with 95% confidence level.
+
+- If the distributions are considered statistically significant, the feature is marked as having statistically significant drift.
+]
+
+
+.footnote[source: Nile Wilson:devblogs at microsoft.]
+
+---
+name: conceptDriftExample
+background-image: url(figures/EvidentlyElConsumptions.jpeg)
+background-size: 50%
+background-position: right
+class: middle
+
+.pull-left[
+
+## Concept drift example
+
+- Two models for the electricity consumption dataset were built. 
+
+- We trained the first model on the **winter** days of 1996 and tested on the **winter** days of 1997. 
+
+- Whereas the second model is trained on the **winter** days of 1996 and 1997 and tested on the **summer** days of 1997. 
+
+- Finally, we generated a Classification **Performance** Report with the help of an open-source library evidently.ai, to compare the performance of these two models.
+]
+
+.footnote[source [Nile Wilson: devblogs at microsoft.](https://devblogs.microsoft.com/cse/2020/10/29/building-a-clinical-data-drift-monitoring-system-with-azure-devops-azure-databricks-and-mlflow/)]
+
+---
+## Monitor data and concept drift
+
+--
+
+### Data drift
+
+- .larger[Data drift can be identified by implementing a data validation step in the pipeline.]
+
+--
+
+### Concept drit
+
+- .larger[Concept drift can be spotted to trigger a retrain if a model decay occur during monitor. ]
+
+--
+
+### Some programs to achive model monitoring and data validation
+
+- TensorFlow extended using data validation component and model analysis component
+- Fiddler 
+- Hydrosphere
+- GitHub Actions
+
+---
+class: section, middle, center
+
+.f3[
+## Challenges with the manual approach
+***
+]
+
+--
+
+## Model and pipeline challenges 
+
+
+---
+## Discussion `r anicon::faa("comment-dots", animate="burst", speed="fast")`
+
+<!-- comment-dots -->
+
+### What type challnges with regards to the model could cause potential problems for ml model life cycle?
+
+```{r echo = FALSE}
+countdown(minutes = 2)
+```
+
+---
+class: highlight-last-item, bold-last-item
+
+## Model Bias and fairness: 
+
+.pull-right[]
+--
+
+- Applications of AI systems can have a critical nature, such as medical diagnosis or prognosis, pairing people’s skills with jobs, or testing the eligibility of a person for a loan. 
+
+--
+
+- The impact of any bias in such systems can be widely harmful. Hence, an important property of future AI systems is **fairness** and **inclusiveness** for all. 
+
+--
+
+- This is specially important across **sensitive** features (gender, race, rare classes …). 
+
+--
+
+- Brainstorm for possible ways the system can go wrong (for example offensive words in nlp models) as well as ways to test these potential bias (multiple accuracy metrics unit tests) on different slices of the data as well as different business platforms.  
+
+???
+
+- The sensitive features depend on the context. Even for insensitive features, it’s important to assess the performance of the AI systems over the different subgroups to make sure we are aware of any underperforming subgroup before a model is deployed (In collaboration with business/product owners).
+
+---
+class: highlight-last-item, bold-last-item
+
+## Complex ML model and data pipeline  
+
+--
+
+- One situation is that an ML engineer is building **two** ml models. One for prediction a user profile (what are the interest of these users, average time spent on each session, dose she/he owns apple watch, does she/he like sport). Secondly, he also builds a recommender system that recommends products.  
+
+--
+
+- Now the problem is **doubled** and the complexity is higher. What if there are four of five ml models in the pipeline. How the change in the data will influence the production. What can we do about updating one model and leave the rest?
+
+--
+
+- How to insure that different data scientes working on different environment produce comparable results, How to insure a **reproducible** results comes from different data scientists. How to track who did what? Is the data transformation on the development branch can be **replicated** to the production environment? 
+
+--
+
+- Challenges: model versioning, model health checking, pipeline automation, trigger retrain for the whole pipeline. This is only for one ml model. Many companies are building several ML models.  
+
+--
+
+- The management of the multiple of models at once is a very cumbersome and challenging task which test the performance of the models at scale.
+
+--
+
+- With the use of MLOps paradigm, it naturally scales and manage multiple of pipelines of models in production. It is also possible to track the data lineage, model versions, training meta data and the model artifacts.
+
+---
+class: top
+name: ComplexModelPipeline
+background-image: url(figures/DataPiplineMultiMlModels.png)
+background-size: 50%
+background-position: right
+
+.pull-left[
+## Complex ML model and data pipeline  
+
+- One situation is that an ML engineer is building **multiple** ml models. One for prediction a user profile (what are the interest of these users, average time spent on each session, dose she/he owns apple watch, does she/he like sport). Secondly, he also builds a recommender system that recommends products.  
+
+- Now the problem is **doubled** and the complexity is higher.
+]
+
+???
+
+- How to insure that different data scientes working on different environment produce comparable results, How to insure a **reproducible** results comes from different data scientists. How to track who did what? Is the data transformation on the development branch can be **replicated** to the production environment? 
+
+-  What if there are four of five ml models in the pipeline. How the change in the data will influence the production. What can we do about updating one model and leave the rest?
+
+- Challenges: model versioning, model health checking, pipeline automation, trigger retrain for the whole pipeline. This is only for one ml model. Many companies are building several ML models. 
+---
+class: top
+name: ComplexModelPipeline_1
+background-image: url(figures/DataPiplineMultiMlModels_2.png)
+background-size: 50%
+background-position: right
+
+.pull-left[
+## Complex ML model and data pipeline 
+- The management of the multiple of models at once is a very cumbersome and challenging task which test the performance of the models at scale.
+
+- With the use of MLOps paradigm, it naturally scales and manage multiple of pipelines of models in production. It is also possible to track the data lineage, model versions, training meta data and the model artifacts.
+]
+
+---
+class: highlight-last-item, bold-last-item
+
+## MLOps, Overview on high level
+
+--
+
+1. **Software Issues** (the usual software development cycle, source code versioning, CI, CD, ... etc).
+
+--
+
+1. **Reproducibility issues** (Not being able to reproduce a specific version of the model results due to random initialization, stochasticity of the model, different packages version, package dependency, data changing. Solutions: data versioning, Conda, Docker). Therefore, in case of a problem, any attempt to roll back to an older version of a model might be impossible. This also, make the workflow reproducible across different OS and platforms.
+
+--
+
+1. **Reusability** (make sure that we do not need to rewrite the same workflow for similar projects, the code can only. be used by the writer of the code and can not be used by other data scientist) using packaging, for instance by employing the features exists in MlFlow project. 
+
+--
+
+1. **Error Prone**: (Training Serving Skew (For instance, A discrepancy between how you handle data in the training and serving pipelines.), Model Decay, Model Bias). This can be spoted by implementing a unit tests (from business point of view) as well as monitoring the model performance in general and on slices of the data.  
+
+--
+
+1. **Optimizing** the overall workflow by using **automation** techniques and experiments tracking. This means that allowing for more automated decisions when a retraining is triggered.(new data format, new features available, implementing a new model, adjusting an existing model). In addition, recording the artifacts of the different .big[experiments]. 
+
+---
+exclude: true
+
+```yaml
+title: "Your Presentation Name"
+subtitle: "Another tag line"  
+author: "Dr. Mrs. Fancy Pants"
+date: '`r Sys.Date()`'
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    chakra: libs/remark-latest.min.js
+    css: [default, default-fonts]
+    seal: false
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      slideNumberFormat: "%current%"
+      ratio: 16:9
+```
+
+
+
+---
+exclude: true
+## MLOps architectures 
+
+![](figures/FullMLOpsPiplineGoogle.png)
+
+.footnote[[source: Maggie Mhanna toward data science](https://towardsdatascience.com/mlops-practices-for-data-scientists-dbb01be45dd8)]
+
+<!-- --- -->
+<!-- ## Automated ML pipline for production  -->
+<!-- <img src="figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-3-ml-automation-ct.svg" style="width:70%;"/> -->
+
+<!-- --- -->
+<!-- ## MLOps architectures  -->
+<!-- <img src="figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-3-ml-automation-ct.svg" alt="Smiley face" width="80%" height="30%" style="vertical-align:bottom"> -->
+
+<!-- --- -->
+<!-- ## r image -->
+
+<!-- ```{r imageSize ,out.width="100%", echo=FALSE, out.height="50%", fig.cap="Spider Plot of the clusters"} -->
+<!-- knitr::include_graphics('figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-3-ml-automation-ct.svg') -->
+<!-- ``` -->
+
+
+
+---
+exclude: true
+
+## MLOps architectures 
+
+![](figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-2-manual-ml.svg)
+
+.footnote[[source: google cloud architecture blog](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_0_manual_process)]
+
+---
+class: section, middle, center
+
+.f3[
+## Automated ML pipline for production
+***
+]
+
+--
+
+## An automated pipline
+
+---
+class: bottom, center, inverse
+
+background-image: url("figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-3-ml-automation-ct.svg")
+<!-- background-size: contain -->
+background-position: top
+background-color: white
+
+???
+
+The goal here is to perform continuous training of the model by automating the ML pipeline; this lets you achieve continuous delivery of model prediction service. To automate the process of using new data to retrain models in production, you need to introduce automated data and model validation steps to the pipeline, as well as pipeline triggers and metadata management.
+
+Characteristics
+
+Rapid experiment: The steps of the ML experiment are orchestrated. The transition between steps is automated, which leads to rapid iteration of experiments.
+
+CT of the model in production: The model is automatically trained in production using fresh data based on live pipeline triggers.
+
+Experimental-operational symmetry: The pipeline implementation that is used in the development or experiment environment is used in the preproduction and production environment.
+
+Modularized code for components and pipelines: To construct ML pipelines, components need to be reusable, composable, and potentially shareable across ML pipelines. In addition, components should ideally be containerized to do the following:
+
+- Decouple the execution environment from the custom code runtime.
+- Make code reproducible between development and production environments.
+- Isolate each component in the pipeline. Components can have their own version of the runtime environment, and have different languages and libraries.
+- Continuous delivery of models: An ML pipeline in production continuously delivers prediction services to new models that are trained on new data. The model deployment step is automated.
+
+- Pipeline deployment: In level 0, you deploy a trained model as a prediction service to production. For level 1, you deploy a whole training pipeline, which automatically and recurrently runs to serve the trained model as the prediction service.
+
+
+---
+class: section, middle, center
+
+.f3[
+## Automated ML pipline for production
+***
+]
+
+--
+
+## An automated with CI/CD pipline
+
+
+---
+class: bottom, center, inverse
+background-image: url("figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-4-ml-automation-ci-cd.svg")
+<!-- background-size: contain -->
+background-position: top
+background-color: white
+
+???
+
+
+- CI is no longer only about testing and validating code and components, but also testing and validating data, data schemas, and models.
+
+- CD is no longer about a single software package or a service, but a system (an ML training pipeline) that should automatically deploy another service (model prediction service).
+
+- CT is a new property, unique to ML systems, that's concerned with automatically retraining and serving the models.
+
+---
+class: section, middle, center
+
+.f3[
+## Automated ML pipline for production example
+***
+]
+
+--
+
+## TensorFlow extended (TFX) pipeline components
+
+---
+class: bottom, center, inverse
+
+background-image: url("figures/TFXWorkFlow.png")
+background-size: 100%
+background-position: middle 
+background-color: white
+
+
+---
+background-image: url("figures/ModelAnalysisTFX.gif")
+background-size: 80%
+background-position: middle 
+background-color: white
+
+
+---
+class: middle
+background-image: url("figures/MetaDataStorage.png")
+background-size: 50%
+background-position: middle
+background-color: white
+
+---
+class: section, middle, center
+
+.f3[
+## TFX TensorFlow extended with orchestration
+***
+]
+
+--
+
+## For example with Kubeflow 
+
+---
+class: bottom, left
+background-image: url("figures/TFX_Pipline.png")
+<!-- background-size: contain -->
+background-position: middle
+background-color: white
+
+
+---
+class: middle
+.f3[ ## End to end MLOps
+***
+]
+
+
+---
+class: bottom, left
+background-image: url("figures/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning-5-stages.svg")
+<!-- background-size: contain -->
+background-position: middle
+background-color: white
+
+.footnote[[source: google cloud architecture blog](https://cloud.google.com/architecture/mlops-continuous-delivery-and-automation-pipelines-in-machine-learning#mlops_level_0_manual_process)]
+

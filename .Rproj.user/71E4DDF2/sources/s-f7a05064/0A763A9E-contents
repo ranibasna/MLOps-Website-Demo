@@ -1,0 +1,9 @@
+rmarkdown::
+convert_ipynb("NoteBooks/TFX.ipynb", output = xfun::with_ext(input, "Rmd"))
+package_version("rmarkdown")
+install.packages("rmarkdown")
+
+packageVersion("rmarkdown")
+jupyter
+
+rmarkdown::pandoc_convert()
