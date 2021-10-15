@@ -1,0 +1,119 @@
+---
+title: "TensorFlow Data Validation"
+description: |
+  An approach to validate your data within a MLOps architecture.
+author:
+  - name: Rani Basna
+    affiliation: KRC
+date: "`r Sys.Date()`"
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+
+
+# TenorFlow data validation TFDV
+
+The goal at this first step of the machine learning pipeline is to check that the data (either in batch or online) meet our expectaions. This means that in the very fiirst stage of the project, we build (together with the business owner) an iimage of the type of data we are going to use. This include the data type (float, int, string, ... etc). if the feature is required or not. TFDV function "infer_schema" can generate the schema  (Preferably after the cleaning of the data, However it is till possible to adjust the schema after generating one). 
+
+Let us first use thee tfdv to generate a statistical overview of the data. We can adjust the code below to do that for our data.
+
+```python
+stats = tfdv.generate_statistics_from_tfrecord(data_location=path)
+# for visualisation we run
+tfdv.visualize_statistics(stats)
+```
+
+
+## Inferring schema
+
+```python
+schema = tfdv.infer_schema(stats)
+```
+
+
+# Checking data expectations
+
+In this step we are trying to match the statistics of the dataset against a pre defined schema. This espeicailly important when we get a new data for the deployed ml pipeline in the production.  For instance one can do
+
+
+## data anomalies 
+
+For instance, suppose that the data at other_path contains examples with values for the feature payment_type outside the domain specified in the schema.
+
+```python
+# Assume that other_path points to another TFRecord file
+other_stats = tfdv.generate_statistics_from_tfrecord(data_location=other_path)
+anomalies = tfdv.validate_statistics(statistics=other_stats, schema=schema)
+```
+
+This will produce 
+
+```python
+payment_type  Unexpected string values  Examples contain values missing from the schema: Prcard (<1%).
+```
+
+
+## Checking data skew and drift
+
+In addition to checking whether a dataset conforms to the expectations set in the schema, TFDV also provides functionalities to detect:
+
+- skew between training and serving data
+- drift between different days of training data
+
+TFDV performs this check by comparing the statistics of different datasets based on the drift/skew comparators specified in the schema. For example, to check if there is any skew between 'payment_type' feature within training and serving dataset:
+
+
+```python
+# Assume we have already generated the statistics of training dataset, and inferred a schema from it.
+serving_stats = tfdv.generate_statistics_from_tfrecord(data_location=serving_data_path)
+# Add a skew comparator to schema for 'payment_type' and set the threshold
+# of L-infinity norm for triggering skew anomaly to be 0.01.
+tfdv.get_feature(schema, 'payment_type').skew_comparator.infinity_norm.threshold = 0.01
+skew_anomalies = tfdv.validate_statistics(
+        statistics=train_stats, schema=schema, serving_statistics=serving_stats)
+```
+
+NOTE To detect skew for numeric features, specify a jensen_shannon_divergence threshold instead of an infinity_norm threshold in the skew_comparator.
+
+For example, suppose the serving data contains significantly more examples with feature payement_type having value Cash, this produces a skew anomaly
+
+```python
+payment_type  High L-infinity distance between serving and training  The L-infinity distance between serving and training is 0.0435984 (up to six significant digits), above the threshold 0.01. The feature value with maximum difference is: Cash
+```
+If the anomaly truly indicates a skew between training and serving data, then further investigation is necessary as this could have a direct impact on model performance
+
+For Detecting drift between different days of training data can be done in a similar way
+
+```python
+# Assume we have already generated the statistics of training dataset for day 2, and inferred a schema from it.
+train_day1_stats = tfdv.generate_statistics_from_tfrecord(data_location=train_day1_data_path)
+# Add a drift comparator to schema for 'payment_type' and set the threshold
+# of L-infinity norm for triggering drift anomaly to be 0.01.
+tfdv.get_feature(schema, 'payment_type').drift_comparator.infinity_norm.threshold = 0.01
+    drift_anomalies = tfdv.validate_statistics(
+        statistics=train_day2_stats, schema=schema, previous_statistics=train_day1_stats)
+```
+
+
+NOTE To detect skew for numeric features, specify a jensen_shannon_divergence threshold instead of an infinity_norm threshold in the drift_comparator.
+
+
+# When to use TFDV
+
+It's easy to think of TFDV as only applying to the start of your training pipeline, as we did here, but in fact it has many uses. Here's a few more:
+
+- Validating new data for inference to make sure that we haven't suddenly started receiving bad features
+- Validating new data for inference to make sure that our model has trained on that part of the decision surface
+- Validating our data after we've transformed it and done feature engineering (probably using TensorFlow Transform) to make sure we haven't done something wrong
+
+
+
+

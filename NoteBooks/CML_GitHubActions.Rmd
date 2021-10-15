@@ -6,7 +6,11 @@ author:
   - name: Rani Basna
     affiliation: KRC
 date: "`r Sys.Date()`"
-output: distill::distill_article
+output:
+  distill::distill_article:
+    self_contained: false
+    toc: true
+    toc_depth: 2
 ---
 
 ```{r setup, include=FALSE}

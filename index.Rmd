@@ -62,3 +62,11 @@ Here you will find a list of the requested assignments as well as information ab
 1. Paleyes, A., Urma, R.-G., & Lawrence, N. D. (2020). Challenges in deploying machine learning: A survey of case studies. 
 2. Sculley, D., Holt, G., Golovin, D., Davydov, E., & Phillips, T. (n.d.). Hidden technical debt in machine learning systems. Retrieved April 28, 2021, from Nips.c https://papers.nips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf
 3. Eric Breck, Neoklis Polyzotis, Sudip Roy, Steven Euijong Whang, Martin Zinkevich, data validation for machine learning (2019), SysML Conference https://systemsandml.org
+
+
+## Interesting blogs and tutorials
+1. https://continuousdelivery.com/
+2. https://neptune.ai/blog/machine-learning-model-management
+3. https://christophergs.com/machine%20learning/2020/03/14/how-to-monitor-machine-learning-models/
+4. https://medium.com/google-developer-experts/mlops-big-picture-in-gcp-a637566d6ae8
+5. https://mlops-guide.github.io/

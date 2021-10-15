@@ -18,6 +18,8 @@ navbar:
       menu:
         - text: "TensorFlow extenstion"
           href: "NoteBooks/TFX.html"
+        - text: "TensorFlow Data Validation"
+          href: "NoteBooks/TFDV.html"
         - text: "Data versioning with DVC"
           href: "NoteBooks/DVC.html"
         - text: "Data Pipeline with DVC"
