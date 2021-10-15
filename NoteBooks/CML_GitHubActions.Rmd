@@ -1,5 +1,5 @@
 ---
-title: "Continuous Machine Learning"
+title: "Continuous Machine Learning with CML and GitHub actions"
 description: |
   A continuous Machine Learning approach to machine learning CI/CD.
 author:

@@ -14,7 +14,7 @@ navbar:
       menu:
         - text: "Lecture"
           href: "slides/MLOpsLecture.html"
-    - text: "Workflows"
+    - text: "Lab sessions"
       menu:
         - text: "TensorFlow extenstion"
           href: "NoteBooks/TFX.html"
@@ -24,7 +24,7 @@ navbar:
           href: "NoteBooks/DVC.html"
         - text: "Data Pipeline with DVC"
           href: "NoteBooks/DVC_pipeline.html"
-        - text: "Continuous machine learning"
+        - text: "Continuous machine learning with CML and GitHub actions"
           href: "NoteBooks/CML_GitHubActions.html"
     - icon: fab fa-github
       href: https://github.com/ranibasna/MLOps
